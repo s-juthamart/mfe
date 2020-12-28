@@ -13,7 +13,7 @@ defaults:
 
 jobs:
   build:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -21,6 +21,7 @@ jobs:
       - run: npm run build
 
       # - uses: chrislennon/action-aws-cli@v1.1
+      - run: pip3 install awscliv2
       - run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
